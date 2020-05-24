@@ -1,10 +1,1 @@
-
-{
-"notes": [
-    {
-        "title":"Test Title",
-        "text":"Test text", 
-        "id": "test_id"
-    }
-]
-}
+[{"title":"Test Title","text":"Test text","id":"test_id"},{"title":"Test Title","text":"Test text","id":"1"},{"title":"Test Title","text":"Test text","id":"2"},{"title":"Finish HW","text":"Node HW","id":"3"},{"title":"Finish ","text":"Node HW","id":"4"}]

@@ -1,5 +1,5 @@
 /*
-    Dependcies
+    Dependencies
     ===============================================================================
 */
 const express = require('express');
@@ -29,7 +29,7 @@ const PORT = process.env.PORT || 3001 //This is necessary for deploying it in he
     request data 
     ===================================================================================== 
 */ 
-const { notes } = require('./db/db.json');
+//const { notes } = require('./db/db.json');
 
 
 /* 
@@ -48,18 +48,27 @@ app.get('/' , (req, res)=> {
 });
 
 app.get('/api/notes', (req, res) => {
-    //return res.sendFile(path.join(__dirname, '/db/', 'db.json'));
-    return  res.json(notes); 
+    return res.sendFile(path.join(__dirname, '/db/', 'db.json'));
+    //  res.json(notes); 
 });
 
 //POST 
-app.post('api/notes', (req,res) => {
-    const newNote = req.body;     
-    console.log(newNote);     
+app.post('/api/notes', (req,res) => {
+    let newNote = req.body;     
+    //console.log(newNote);  
+    let notes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    let noteId = (notes.length).toString();
+    newNote.id = noteId
     notes.push(newNote);    
-    res.json(newNote);
+
+    fs.writeFileSync("./db/db.json", JSON.stringify(notes));
+    console.log("Note is saved: " + newNote);
+    res.json(notes);
       
 });
+
+//DELETE
+app.delete('/api/notes/:id')
 
 
 /*
